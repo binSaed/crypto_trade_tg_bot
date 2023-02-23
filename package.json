@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@binance/connector": "^2.0.1",
+    "play-sound": "^1.1.5",
+    "telegram": "^2.15.10"
+  }
 }
