@@ -80,9 +80,19 @@ const makeOrder = async (tradeInfo) => {
   const buyUsdtAmout = 20; //10$
   const quantity = buyUsdtAmout / tradeInfo.price;
   const precision = await getPrecision(tradeInfo.name);
+
   await spot
     .newOrder(tradeInfo.name, "BUY", "LIMIT", {
       price: tradeInfo.price,
+      quantity: quantity.toFixed(precision),
+      timeInForce: "GTC",
+    })
+    .then((response) => spot.logger.log(response.data))
+    .catch((error) => spot.logger.error(error));
+
+  await spot
+    .newOrder(tradeInfo.name, "BUY", "LIMIT", {
+      price: tradeInfo.price * 0.95,
       quantity: quantity.toFixed(precision),
       timeInForce: "GTC",
     })
